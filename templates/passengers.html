@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+Passengers
+{% endblock %}
+
+{% block content %}
+
+<h2>Passengers</h2>
+
+
+
+<a href="/passengers/add" class="btn btn-success mb-3">
+    Add Passenger
+</a>
+<form method="GET"
+      action="/passengers/search">
+
+    <input
+        type="text"
+        name="q"
+        placeholder="Name , Phone">
+
+    <button class="btn btn-primary">
+        Search
+    </button>
+
+</form>
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Credit</th>
+            <th>Current_lat</th>
+            <th>Current_long</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for passenger in passengers %}
+
+        <tr>
+            <td>{{ passenger.id }}</td>
+
+            <td>{{ passenger.user.fullname }}</td>
+
+            <td>{{ passenger.user.phone }}</td>
+
+            <td>{{ passenger.credit }}</td>
+
+            <td>{{ passenger.current_lat }}</td>
+
+            <td>{{ passenger.current_long }}</td>
+
+            <td>
+                <a href="/passengers/delete/{{ passenger.id }}"
+                   class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+            </td>
+            <td>
+                <a href="/passengers/edit/{{ passenger.id }}"
+   class="btn btn-warning btn-sm">
+    Edit
+</a>
+            </td>
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

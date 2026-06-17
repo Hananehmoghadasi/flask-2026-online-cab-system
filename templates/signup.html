@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>ثبت نام</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label>نام کامل</label>
+        <input type="text" name="fullname" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>شماره تلفن</label>
+        <input type="text" name="phone" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>رمز عبور</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>نقش</label>
+        <select name="role" class="form-control">
+            <option value="passenger">مسافر</option>
+            <option value="driver">راننده</option>
+            <option value="admin">مدیر (نیاز به تأیید جداگانه)</option>
+        </select>
+    </div>
+    <button class="btn btn-primary">ثبت نام</button>
+    <a href="/login" class="btn btn-secondary">ورود</a>
+</form>
+{% endblock %}

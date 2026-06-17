@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Dashboard</h2>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h5>Users</h5>
+            <h3>{{ total_users }}</h3>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h5>Drivers</h5>
+            <h3>{{ total_drivers }}</h3>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h5>Passengers</h5>
+            <h3>{{ total_passengers }}</h3>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h5>Total Trips</h5>
+            <h3>{{ total_trips }}</h3>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h5>Completed Trips</h5>
+            <h3>{{ completed_trips }}</h3>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="card p-3">
+    <h4>Total Revenue</h4>
+    <h2>{{ total_revenue }}</h2>
+</div>
+<div>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Users', 'Drivers', 'Passengers', 'Total_trips', 'Completed_trips', 'Total Revenue'],
+      datasets: [{
+        label: '# of Votes',
+        data: [{{ total_users }}, {{ total_drivers }}, {{ total_passengers }}, {{ total_trips }}, {{ completed_trips }}, {{ total_revenue }}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
+{% endblock %}

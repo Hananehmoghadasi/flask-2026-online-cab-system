@@ -1,0 +1,71 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}
+Users
+{% endblock %}
+
+{% block content %}
+<h2>Users</h2>
+
+<a href="/users/add" class="btn btn-success mb-3">
+    Add User
+</a>
+<form method="GET"
+      action="/users/search">
+
+    <input type="text"
+           name="q"
+           placeholder="Name , Phone">
+
+    <button>
+        Search
+    </button>
+
+</form>
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Created Date</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for user in users %}
+
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.fullname }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.created_date }}</td>
+
+            <td>
+                <a href="/users/delete/{{ user.id }}"
+                   class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+            </td>
+            <td>
+                <a href="/users/edit/{{ user.id }}"
+   class="btn btn-warning">
+   Edit
+</a>
+            </td>
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}

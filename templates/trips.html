@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Trips</h2>
+
+<a href="{{ url_for('request_trip') }}"
+   class="btn btn-success mb-3">
+    Request New Trip
+</a>
+
+<form method="GET" action="/trips/search">
+
+    <input
+        type="text"
+        name="q"
+        placeholder="Trip ID, Driver, Passenger, Status">
+
+    <button class="btn btn-primary">
+        Search
+    </button>
+
+</form>
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Driver</th>
+            <th>Passenger</th>
+            <th>Status</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for trip in trips %}
+
+        <tr>
+
+            <td>{{ trip.id }}</td>
+
+            <td>
+                {{ trip.driver.user.fullname }}
+            </td>
+
+            <td>
+                {{ trip.passenger.user.fullname }}
+            </td>
+
+            <td>
+                {{ trip.status }}
+            </td>
+
+            <td>
+                {{ trip.price }}
+            </td>
+
+            <td>
+
+                {% if trip.status != "completed" %}
+
+                <a href="{{ url_for('complete_trip',
+                                    trip_id=trip.id) }}"
+                   class="btn btn-warning btn-sm">
+
+                    Complete
+
+                </a>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}
+Reviews
+{% endblock %}
+
+{% block content %}
+
+<h2>Reviews</h2>
+
+<a href="/reviews/add" class="btn btn-success mb-3">
+    Add Review
+</a>
+<form method="GET"
+      action="/reviews/search">
+
+    <input type="text"
+           name="q"
+           placeholder="User Name , Phone">
+
+    <button>
+        Search
+    </button>
+
+</form>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Trip Id</th>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>User Phone</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for review in reviews %}
+
+        <tr>
+
+            <td>{{ review.id }}</td>
+
+            <td>
+                {{ review.trip.id }}
+            </td>
+
+            <td>
+                {{ review.user.id }}
+            </td>
+
+            <td>
+                {{ review.user.fullname }}
+            </td>
+
+            <td>
+                {{ review.user.phone }}
+            </td>
+
+            <td>
+                {{ review.rating }}
+            </td>
+
+            <td>
+                {{ review.comment }}
+            </td>
+            <td>
+                <a href="/reviews/delete/{{ review.id }}"
+                   class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+            </td>
+            <td>
+                <a href="/reviews/edit/{{ review.id }}"
+                class="btn btn-warning btn-sm">
+                    Edit
+                </a>
+            </td>
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

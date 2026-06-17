@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Active Drivers</h2>
+
+<table class="table table-striped">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Rating</th>
+        <th>Vehicle</th>
+        <th>Plate</th>
+        <th>Location</th>
+    </tr>
+
+    {% for item in data %}
+
+    <tr>
+
+        <td>{{ item.driver.id }}</td>
+
+        <td>
+            {{ item.driver.user.fullname }}
+        </td>
+
+        <td>
+            {{ item.driver.rating }}
+        </td>
+
+        <td>
+    {% if item.vehicle %}
+        {{ item.vehicle.model }}
+    {% else %}
+        -
+    {% endif %}
+</td>
+
+<td>
+    {% if item.vehicle %}
+        {{ item.vehicle.plate }}
+    {% else %}
+        -
+    {% endif %}
+</td>
+
+        <td>
+
+            {% if item.location %}
+
+                {{ item.location.latitude }}
+                ,
+                {{ item.location.longitude }}
+
+            {% else %}
+
+                No Location
+
+            {% endif %}
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

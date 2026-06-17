@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+Drivers
+{% endblock %}
+
+{% block content %}
+
+<h2>Drivers</h2>
+
+<a href="/drivers/add" class="btn btn-success mb-3">
+    Add Driver
+</a>
+
+<form method="GET"
+      action="/drivers/search">
+
+    <input type="text"
+           name="q"
+           placeholder="Name , Phone">
+
+    <button>
+        Search
+    </button>
+
+</form>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Rating</th>
+            <th>Status</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for driver in drivers %}
+
+<tr>
+    <td>{{ driver.id }}</td>
+    <td>{{ driver.user.fullname }}</td>
+    <td>{{ driver.user.phone }}</td>
+    <td>{{ driver.rating }}</td>
+    <td>{{ driver.status }}</td>
+
+    <td>
+        <a href="/drivers/delete/{{ driver.id }}"
+           class="btn btn-danger btn-sm">
+            Delete
+        </a>
+    </td>
+
+    <td>
+        <a href="/drivers/edit/{{ driver.id }}"
+           class="btn btn-warning btn-sm">
+            Edit
+        </a>
+    </td>
+</tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

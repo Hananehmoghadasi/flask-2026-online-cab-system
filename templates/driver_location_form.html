@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST">
+
+    <label>Driver</label>
+
+    <select name="driver_id">
+
+        {% for driver in drivers %}
+
+        <option value="{{ driver.id }}"
+
+        {% if location and location.driver.id == driver.id %}
+            selected
+        {% endif %}
+
+        >
+
+            {{ driver.user.fullname }}
+
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Latitude</label>
+
+    <input type="number"
+           step="0.000001"
+           name="latitude"
+           value="{{ location.latitude if location else '' }}">
+
+    <br><br>
+
+    <label>Longitude</label>
+
+    <input type="number"
+           step="0.000001"
+           name="longitude"
+           value="{{ location.longitude if location else '' }}">
+
+    <br><br>
+
+    <button class="btn btn-primary">
+        Save
+    </button>
+
+</form>
+
+{% endblock %}

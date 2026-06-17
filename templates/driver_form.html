@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Driver
+{% endblock %}
+
+{% block content %}
+
+<h2>Add New Driver</h2>
+<form method="POST">
+
+    <div class="mb-3">
+        <label>User</label>
+
+        <select name="user_id" class="form-control">
+
+            {% for user in users %}
+
+            <option value="{{ user.id }}">
+                {{ user.fullname }} ({{ user.phone }})
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <label>Rating</label>
+
+    <input type="number"
+           step="0.1"
+           name="rating"
+           value="{{ driver.rating if driver else '' }}"><br><br>
+
+    <label>Status</label>
+
+    <select name="status">
+
+        <option value="active"
+        {% if driver and driver.status == 'active' %}
+        selected
+        {% endif %}
+        >
+            Active
+        </option>
+
+        <option value="inactive"
+        {% if driver and driver.status == 'inactive' %}
+        selected
+        {% endif %}
+        >
+            Inactive
+        </option>
+
+        <option value="busy"
+        {% if driver and driver.status == 'busy' %}
+        selected
+        {% endif %}
+        >
+            Busy
+        </option>
+
+    </select><br><br>
+
+    <button class="btn btn-primary">
+        Save
+    </button>
+
+</form>
+
+{% endblock %}

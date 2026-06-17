@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Passenger
+{% endblock %}
+
+{% block content %}
+
+<h2>Add New Passenger</h2>
+<form method="POST">
+
+    <div class="mb-3">
+        <label>User</label>
+
+        <select name="user_id" class="form-control">
+
+            {% for user in users %}
+
+            <option value="{{ user.id }}">
+                {{ user.fullname }} ({{ user.phone }})
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+        <label>Credit</label>
+        <input type="number"
+       step="0.01"
+       name="credit"
+       value="{{ passenger.credit if passenger else '' }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Current_lat</label>
+        <input type="number"
+       step="0.000001"
+       name="current_lat"
+       value="{{ passenger.current_lat if passenger else '' }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Current_long</label>
+        <input type="number"
+       step="0.000001"
+       name="current_long"
+       value="{{ passenger.current_long if passenger else '' }}">
+    </div>
+    <button class="btn btn-primary">
+        Save Passenger
+    </button>
+</form>
+{% endblock %}

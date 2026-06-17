@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Payment
+{% endblock %}
+
+{% block content %}
+
+<h2>Add New Payment</h2>
+<form method="POST">
+
+    <div class="mb-3">
+        <label>Trip</label>
+
+        <select name="trip_id" class="form-control">
+
+            {% for trip in trips %}
+
+            <option value="{{ trip.id }}">
+                {{ trip.id}} ({{ trip.driver.user.fullname}}) ({{ trip.passenger.user.fullname}})
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+        <label>Amount</label>
+        <input type="number"
+               step="10000"
+               name="amount"
+               value="{{ payment.amount if payment else '' }}"
+               class="form-control">
+    </div>
+    <div class="mb-3">
+    <label class="form-label">Method</label>
+
+    <select name="method" class="form-control">
+
+        <option value="cash">
+            Cash
+        </option>
+
+        <option value="card">
+            Card
+        </option>
+
+        <option value="wallet">
+            Wallet
+        </option>
+
+    </select>
+
+</div>
+    <div class="mb-3">
+    <label class="form-label">Status</label>
+
+    <select name="status" class="form-control">
+
+        <option value="pending">
+            Pending
+        </option>
+
+        <option value="completed">
+            Completed
+        </option>
+
+        <option value="failed">
+            Failed
+        </option>
+
+    </select>
+
+
+
+    <button class="btn btn-primary">
+        Save Payment
+    </button>
+    
+</form>
+{% endblock %}

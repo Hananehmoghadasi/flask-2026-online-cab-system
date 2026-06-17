@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Driver Locations</h2>
+
+<a href="/driver_locations/add"
+   class="btn btn-success mb-3">
+
+    Add Location
+
+</a>
+<form method="GET"
+      action="/driver_locations/search">
+
+    <input type="text"
+           name="q"
+           placeholder="Driver Name">
+
+    <button>
+        Search
+    </button>
+
+</form>
+
+<table class="table">
+
+<tr>
+    <th>ID</th>
+    <th>Driver</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Delete</th>
+    <th>Update</th>
+</tr>
+
+{% for loc in locations %}
+
+<tr>
+
+    <td>{{ loc.id }}</td>
+
+    <td>
+        {{ loc.driver.user.fullname }}
+    </td>
+
+    <td>{{ loc.latitude }}</td>
+
+    <td>{{ loc.longitude }}</td>
+    <td>
+    <a href="/driver_locations/delete/{{ loc.id }}"
+       class="btn btn-danger btn-sm">
+        Delete
+    </a>
+</td>
+
+<td>
+    <a href="/driver_locations/edit/{{ loc.id }}"
+       class="btn btn-warning btn-sm">
+        Edit
+    </a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

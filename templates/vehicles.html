@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+Vehicles
+{% endblock %}
+
+{% block content %}
+
+<h2>Vehicles</h2>
+
+<a href="/vehicles/add" class="btn btn-success mb-3">
+    Add Vehicle
+</a>
+
+<form method="GET"
+      action="/vehicles/search">
+
+    <input type="text"
+           name="q"
+           placeholder="Driver Name , Plate">
+
+    <button>
+        Search
+    </button>
+
+</form>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Driver Name</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>Plate</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for vehicle in vehicles %}
+
+        <tr>
+            <td>{{ vehicle.id }}</td>
+
+            <td>{{ vehicle.driver.user.fullname }}</td>
+
+            <td>{{ vehicle.model }}</td>
+
+            <td>{{ vehicle.color }}</td>
+
+            <td>{{ vehicle.plate }}</td>
+
+            <td>
+                <a href="/vehicles/delete/{{ vehicle.id }}"
+                   class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+            </td>
+            <td>
+                <a href="/vehicles/edit/{{ vehicle.id }}"
+                class="btn btn-warning btn-sm">
+                    Edit
+                </a>
+            </td>
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

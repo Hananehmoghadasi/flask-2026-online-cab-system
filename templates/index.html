@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">Taxi Management System</h1>
+
+<div class="row g-3">
+
+    <div class="col-md-4">
+        <a href="{{ url_for('users') }}"
+           class="btn btn-primary w-100">
+            Users
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('drivers') }}"
+           class="btn btn-primary w-100">
+            Drivers
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('passengers') }}"
+           class="btn btn-primary w-100">
+            Passengers
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ url_for('vehicles') }}"
+           class="btn btn-primary w-100">
+            Vehicles
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ url_for('payments') }}"
+           class="btn btn-primary w-100">
+            Payments
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ url_for('reviews') }}"
+           class="btn btn-primary w-100">
+            Reviews
+        </a>
+    </div>
+    <div class="col-md-4">
+    <a href="/active_drivers"
+       class="btn btn-success w-100">
+        Active Drivers
+    </a>
+</div>
+    <div class="col-md-4">
+        <a href="{{ url_for('driver_locations') }}"
+           class="btn btn-primary w-100">
+            Driver_locations
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('trips') }}"
+           class="btn btn-warning w-100">
+            Trips
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('request_trip') }}"
+           class="btn btn-success w-100">
+            Request Trip
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('earnings') }}"
+           class="btn btn-info w-100">
+            Earnings
+        </a>
+    </div>
+    <a href="/dashboard"
+   class="btn btn-dark">
+    Dashboard
+</a>
+
+</div>
+
+{% endblock %}

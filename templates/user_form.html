@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add User
+{% endblock %}
+
+{% block content %}
+
+<h2>Add New User</h2>
+
+
+<form method="POST">
+label>Full Name</label>
+
+<input type="text"
+       name="fullname">
+
+<br>
+
+<label>Phone</label>
+
+<input type="text"
+       name="phone">
+
+<br>
+
+<label>Password</label>
+
+<input type="password"
+       name="password">
+
+<br>
+
+<label>Role</label>
+
+<select name="role">
+
+    <option value="admin">
+        Admin
+    </option>
+
+    <option value="driver">
+        Driver
+    </option>
+
+    <option value="passenger">
+        Passenger
+    </option>
+
+</select>
+
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+
+        <input
+            type="text"
+            name="fullname"
+            class="form-control"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+
+        <input
+            type="text"
+            name="phone"
+            class="form-control"
+            required>
+    </div>
+
+    <button class="btn btn-primary">
+        Save User
+    </button>
+
+</form>
+
+<
+{% endblock %}

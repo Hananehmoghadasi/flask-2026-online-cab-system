@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>earnings</h2>
+
+    <div class="card mb-3">
+        <div class="card-body">
+                <h4>Total Earnings:{{total or 0}}</h4>
+        </div>
+
+    </div>
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>Driver</th>
+            <th>Earnings</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in driver_earnings %}
+
+        <tr>
+            <td>{{ item.name }}</td>
+
+
+
+            <td>{{ item.amount }}</td>
+
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

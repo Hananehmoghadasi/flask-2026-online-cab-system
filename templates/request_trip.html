@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Request Trip</h2>
+
+<form method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Passenger
+        </label>
+
+        <select
+            name="passenger_id"
+            class="form-control">
+
+            {% for passenger in passengers %}
+
+            <option value="{{ passenger.id }}">
+
+                {{ passenger.user.fullname }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Start Latitude
+        </label>
+
+        <input
+            type="number"
+            step="0.000001"
+            name="start_lat"
+            class="form-control"
+            required>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Start Longitude
+        </label>
+
+        <input
+            type="number"
+            step="0.000001"
+            name="start_lon"
+            class="form-control"
+            required>
+
+    </div>
+
+    <button
+        class="btn btn-success">
+
+        Request Trip
+
+    </button>
+
+</form>
+
+{% endblock %}
