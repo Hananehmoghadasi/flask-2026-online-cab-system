@@ -1,5 +1,3 @@
-
-
 {% extends "base.html" %}
 
 {% block title %}
@@ -7,36 +5,66 @@ Users
 {% endblock %}
 
 {% block content %}
-<h2>Users</h2>
 
-<a href="/users/add" class="btn btn-success mb-3">
-    Add User
-</a>
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+
+    <h2 class="mb-3 mb-md-0">
+        <i class="fa-solid fa-users text-info"></i>
+        Users
+    </h2>
+
+    <a href="/users/add" class="btn btn-success">
+        <i class="fa-solid fa-user-plus"></i>
+        Add User
+    </a>
+
+</div>
+
 <form method="GET"
-      action="/users/search">
+      action="/users/search"
+      class="row g-2 mb-4">
 
-    <input type="text"
-           name="q"
-           placeholder="Name , Phone">
+    <div class="col-md-10">
 
-    <button>
-        Search
-    </button>
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search by name or phone">
+
+    </div>
+
+    <div class="col-md-2 d-grid">
+
+        <button class="btn btn-primary">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Search
+
+        </button>
+
+    </div>
 
 </form>
 
+<div class="table-responsive">
 
+<table class="table table-hover align-middle">
 
-<table class="table table-bordered">
-    <thead>
+    <thead class="table-dark">
+
         <tr>
+
             <th>ID</th>
             <th>Full Name</th>
             <th>Phone</th>
             <th>Created Date</th>
-            <th>Delete</th>
-            <th>Update</th>
+            <th class="text-center">Delete</th>
+            <th class="text-center">Edit</th>
+
         </tr>
+
     </thead>
 
     <tbody>
@@ -44,28 +72,48 @@ Users
     {% for user in users %}
 
         <tr>
+
             <td>{{ user.id }}</td>
-            <td>{{ user.fullname }}</td>
-            <td>{{ user.phone }}</td>
-            <td>{{ user.created_date }}</td>
 
             <td>
+                <i class="fa-solid fa-user text-info me-1"></i>
+                {{ user.fullname }}
+            </td>
+
+            <td>{{ user.phone }}</td>
+
+            <td>{{ user.created_date }}</td>
+
+            <td class="text-center">
+
                 <a href="/users/delete/{{ user.id }}"
                    class="btn btn-danger btn-sm">
-                    Delete
+
+                    <i class="fa-solid fa-trash"></i>
+
                 </a>
+
             </td>
-            <td>
+
+            <td class="text-center">
+
                 <a href="/users/edit/{{ user.id }}"
-   class="btn btn-warning">
-   Edit
-</a>
+                   class="btn btn-warning btn-sm">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </a>
+
             </td>
+
         </tr>
 
     {% endfor %}
 
     </tbody>
+
 </table>
+
+</div>
 
 {% endblock %}

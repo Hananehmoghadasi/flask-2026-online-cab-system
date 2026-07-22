@@ -6,78 +6,94 @@ Add Payment
 
 {% block content %}
 
-<h2>Add New Payment</h2>
-<form method="POST">
+<div class="card p-4 mx-auto form-card">
 
-    <div class="mb-3">
-        <label>Trip</label>
+    <h2 class="mb-4 text-center">
+        <i class="fa-solid fa-credit-card text-info"></i>
+        Add New Payment
+    </h2>
 
-        <select name="trip_id" class="form-control">
+    <form method="POST">
 
-            {% for trip in trips %}
+        <div class="mb-3">
 
-            <option value="{{ trip.id }}">
-                {{ trip.id}} ({{ trip.driver.user.fullname}}) ({{ trip.passenger.user.fullname}})
-            </option>
+            <label class="form-label">Trip</label>
 
-            {% endfor %}
+            <select name="trip_id" class="form-select">
 
-        </select>
+                {% for trip in trips %}
 
-    </div>
+                <option value="{{ trip.id }}">
+                    Trip #{{ trip.id }} | {{ trip.driver.user.fullname }} → {{ trip.passenger.user.fullname }}
+                </option>
 
-    <div class="mb-3">
-        <label>Amount</label>
-        <input type="number"
-               step="10000"
-               name="amount"
-               value="{{ payment.amount if payment else '' }}"
-               class="form-control">
-    </div>
-    <div class="mb-3">
-    <label class="form-label">Method</label>
+                {% endfor %}
 
-    <select name="method" class="form-control">
+            </select>
 
-        <option value="cash">
-            Cash
-        </option>
+        </div>
 
-        <option value="card">
-            Card
-        </option>
+        <div class="mb-3">
 
-        <option value="wallet">
-            Wallet
-        </option>
+            <label class="form-label">Amount</label>
 
-    </select>
+            <input
+                type="number"
+                step="10000"
+                name="amount"
+                class="form-control"
+                placeholder="Amount"
+                value="{{ payment.amount if payment else '' }}"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">Payment Method</label>
+
+            <select name="method" class="form-select">
+
+                <option value="cash">💵 Cash</option>
+
+                <option value="card">💳 Card</option>
+
+                <option value="wallet">👛 Wallet</option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label class="form-label">Status</label>
+
+            <select name="status" class="form-select">
+
+                <option value="pending">🟡 Pending</option>
+
+                <option value="completed">🟢 Completed</option>
+
+                <option value="failed">🔴 Failed</option>
+
+            </select>
+
+        </div>
+
+        <div class="text-center">
+
+            <button type="submit" class="btn btn-primary px-5">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Payment
+
+            </button>
+
+        </div>
+
+    </form>
 
 </div>
-    <div class="mb-3">
-    <label class="form-label">Status</label>
 
-    <select name="status" class="form-control">
-
-        <option value="pending">
-            Pending
-        </option>
-
-        <option value="completed">
-            Completed
-        </option>
-
-        <option value="failed">
-            Failed
-        </option>
-
-    </select>
-
-
-
-    <button class="btn btn-primary">
-        Save Payment
-    </button>
-    
-</form>
 {% endblock %}

@@ -1,70 +1,138 @@
 {% extends "base.html" %}
 
+{% block title %}
+Driver Locations
+{% endblock %}
+
 {% block content %}
 
-<h2>Driver Locations</h2>
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
 
-<a href="/driver_locations/add"
-   class="btn btn-success mb-3">
+    <h2 class="mb-3 mb-md-0">
+        <i class="fa-solid fa-location-dot text-danger"></i>
+        Driver Locations
+    </h2>
 
-    Add Location
+    <a href="/driver_locations/add" class="btn btn-success">
+        <i class="fa-solid fa-plus"></i>
+        Add Location
+    </a>
 
-</a>
+</div>
+
 <form method="GET"
-      action="/driver_locations/search">
+      action="/driver_locations/search"
+      class="row g-2 mb-4">
 
-    <input type="text"
-           name="q"
-           placeholder="Driver Name">
+    <div class="col-md-10">
 
-    <button>
-        Search
-    </button>
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search by driver name">
+
+    </div>
+
+    <div class="col-md-2 d-grid">
+
+        <button class="btn btn-primary">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Search
+
+        </button>
+
+    </div>
 
 </form>
 
-<table class="table">
+<div class="table-responsive">
 
-<tr>
-    <th>ID</th>
-    <th>Driver</th>
-    <th>Latitude</th>
-    <th>Longitude</th>
-    <th>Delete</th>
-    <th>Update</th>
-</tr>
+<table class="table table-hover align-middle">
 
-{% for loc in locations %}
+    <thead class="table-dark">
 
-<tr>
+        <tr>
 
-    <td>{{ loc.id }}</td>
+            <th>ID</th>
+            <th>Driver</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th class="text-center">Delete</th>
+            <th class="text-center">Edit</th>
 
-    <td>
-        {{ loc.driver.user.fullname }}
-    </td>
+        </tr>
 
-    <td>{{ loc.latitude }}</td>
+    </thead>
 
-    <td>{{ loc.longitude }}</td>
-    <td>
-    <a href="/driver_locations/delete/{{ loc.id }}"
-       class="btn btn-danger btn-sm">
-        Delete
-    </a>
-</td>
+    <tbody>
 
-<td>
-    <a href="/driver_locations/edit/{{ loc.id }}"
-       class="btn btn-warning btn-sm">
-        Edit
-    </a>
-</td>
+    {% for loc in locations %}
 
-</tr>
+    <tr>
 
-{% endfor %}
+        <td>{{ loc.id }}</td>
+
+        <td>
+
+            <i class="fa-solid fa-user text-info me-1"></i>
+
+            {{ loc.driver.user.fullname }}
+
+        </td>
+
+        <td>
+
+            <span class="badge bg-success">
+
+                📍 {{ loc.latitude }}
+
+            </span>
+
+        </td>
+
+        <td>
+
+            <span class="badge bg-primary">
+
+                📍 {{ loc.longitude }}
+
+            </span>
+
+        </td>
+
+        <td class="text-center">
+
+            <a href="/driver_locations/delete/{{ loc.id }}"
+               class="btn btn-danger btn-sm">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </a>
+
+        </td>
+
+        <td class="text-center">
+
+            <a href="/driver_locations/edit/{{ loc.id }}"
+               class="btn btn-warning btn-sm">
+
+                <i class="fa-solid fa-pen"></i>
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
 
 </table>
+
+</div>
 
 {% endblock %}

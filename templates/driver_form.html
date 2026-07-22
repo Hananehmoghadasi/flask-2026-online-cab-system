@@ -6,67 +6,75 @@ Add Driver
 
 {% block content %}
 
-<h2>Add New Driver</h2>
-<form method="POST">
+<div class="card p-4 mx-auto" style="max-width:700px;">
 
-    <div class="mb-3">
-        <label>User</label>
+    <h2 class="mb-4 text-center">
+        <i class="fa-solid fa-car-side text-info"></i>
+        Add New Driver
+    </h2>
 
-        <select name="user_id" class="form-control">
+    <form method="POST">
 
-            {% for user in users %}
+        <div class="mb-3">
+            <label class="form-label">User</label>
 
-            <option value="{{ user.id }}">
-                {{ user.fullname }} ({{ user.phone }})
-            </option>
+            <select name="user_id" class="form-select">
 
-            {% endfor %}
+                {% for user in users %}
 
-        </select>
+                <option value="{{ user.id }}">
+                    {{ user.fullname }} ({{ user.phone }})
+                </option>
 
-    </div>
+                {% endfor %}
 
-    <label>Rating</label>
+            </select>
+        </div>
 
-    <input type="number"
-           step="0.1"
-           name="rating"
-           value="{{ driver.rating if driver else '' }}"><br><br>
+        <div class="mb-3">
+            <label class="form-label">Rating</label>
 
-    <label>Status</label>
+            <input
+                type="number"
+                step="0.1"
+                name="rating"
+                class="form-control"
+                placeholder="Driver Rating"
+                value="{{ driver.rating if driver else '' }}">
+        </div>
 
-    <select name="status">
+        <div class="mb-4">
+            <label class="form-label">Status</label>
 
-        <option value="active"
-        {% if driver and driver.status == 'active' %}
-        selected
-        {% endif %}
-        >
-            Active
-        </option>
+            <select name="status" class="form-select">
 
-        <option value="inactive"
-        {% if driver and driver.status == 'inactive' %}
-        selected
-        {% endif %}
-        >
-            Inactive
-        </option>
+                <option value="active"
+                    {% if driver and driver.status=='active' %}selected{% endif %}>
+                    Active
+                </option>
 
-        <option value="busy"
-        {% if driver and driver.status == 'busy' %}
-        selected
-        {% endif %}
-        >
-            Busy
-        </option>
+                <option value="busy"
+                    {% if driver and driver.status=='busy' %}selected{% endif %}>
+                    Busy
+                </option>
 
-    </select><br><br>
+                <option value="inactive"
+                    {% if driver and driver.status=='inactive' %}selected{% endif %}>
+                    Inactive
+                </option>
 
-    <button class="btn btn-primary">
-        Save
-    </button>
+            </select>
+        </div>
 
-</form>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary px-5">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Save Driver
+            </button>
+        </div>
+
+    </form>
+
+</div>
 
 {% endblock %}

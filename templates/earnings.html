@@ -1,37 +1,122 @@
 {% extends "base.html" %}
 
+{% block title %}
+Drivers
+{% endblock %}
+
 {% block content %}
 
-<h2>earnings</h2>
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
 
-    <div class="card mb-3">
-        <div class="card-body">
-                <h4>Total Earnings:{{total or 0}}</h4>
-        </div>
+    <h2 class="mb-3 mb-md-0">
+        <i class="fa-solid fa-car-side text-info"></i>
+        Drivers
+    </h2>
 
+    <a href="{{ url_for('add_driver') }}" class="btn btn-success">
+        <i class="fa-solid fa-plus"></i>
+        Add Driver
+    </a>
+
+</div>
+
+<form method="GET"
+      action="{{ url_for('search_drivers') }}"
+      class="row g-2 mb-4">
+
+    <div class="col-md-10">
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search by name or phone">
     </div>
-<table class="table table-striped">
 
-    <thead>
-        <tr>
-            <th>Driver</th>
-            <th>Earnings</th>
-        </tr>
+    <div class="col-md-2 d-grid">
+        <button class="btn btn-primary">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Search
+        </button>
+    </div>
+
+</form>
+
+<div class="table-responsive">
+
+<table class="table table-hover align-middle">
+
+    <thead class="table-dark">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Rating</th>
+        <th>Status</th>
+        <th class="text-center">Delete</th>
+        <th class="text-center">Edit</th>
+    </tr>
+
     </thead>
 
     <tbody>
 
-    {% for item in driver_earnings %}
+    {% for driver in drivers %}
 
-        <tr>
-            <td>{{ item.name }}</td>
+    <tr>
 
+        <td>{{ driver.id }}</td>
 
+        <td>{{ driver.user.fullname }}</td>
 
-            <td>{{ item.amount }}</td>
+        <td>{{ driver.user.phone }}</td>
 
-        </tr>
+        <td>⭐ {{ driver.rating }}</td>
+
+        <td>
+
+            {% if driver.status == "active" %}
+                <span class="badge bg-success">Active</span>
+
+            {% elif driver.status == "busy" %}
+                <span class="badge bg-warning text-dark">Busy</span>
+
+            {% else %}
+                <span class="badge bg-secondary">Inactive</span>
+            {% endif %}
+
+        </td>
+
+        <td class="text-center">
+
+            <a href="{{ url_for('delete_driver', id=driver.id) }}"
+               class="btn btn-danger btn-sm">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </a>
+
+        </td>
+
+        <td class="text-center">
+
+            <a href="{{ url_for('edit_driver', id=driver.id) }}"
+               class="btn btn-warning btn-sm">
+
+                <i class="fa-solid fa-pen"></i>
+
+            </a>
+
+        </td>
+
+    </tr>
+
     {% endfor %}
+
+    </tbody>
+
 </table>
+
+</div>
 
 {% endblock %}

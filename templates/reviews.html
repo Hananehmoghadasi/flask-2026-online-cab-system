@@ -6,38 +6,67 @@ Reviews
 
 {% block content %}
 
-<h2>Reviews</h2>
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
 
-<a href="/reviews/add" class="btn btn-success mb-3">
-    Add Review
-</a>
+    <h2 class="mb-3 mb-md-0">
+        <i class="fa-solid fa-star text-warning"></i>
+        Reviews
+    </h2>
+
+    <a href="/reviews/add" class="btn btn-success">
+        <i class="fa-solid fa-plus"></i>
+        Add Review
+    </a>
+
+</div>
+
 <form method="GET"
-      action="/reviews/search">
+      action="/reviews/search"
+      class="row g-2 mb-4">
 
-    <input type="text"
-           name="q"
-           placeholder="User Name , Phone">
+    <div class="col-md-10">
 
-    <button>
-        Search
-    </button>
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search by user name or phone">
+
+    </div>
+
+    <div class="col-md-2 d-grid">
+
+        <button class="btn btn-primary">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Search
+
+        </button>
+
+    </div>
 
 </form>
 
-<table class="table table-bordered">
+<div class="table-responsive">
 
-    <thead>
+<table class="table table-hover align-middle">
+
+    <thead class="table-dark">
+
         <tr>
+
             <th>ID</th>
-            <th>Trip Id</th>
-            <th>User Id</th>
-            <th>User Name</th>
-            <th>User Phone</th>
+            <th>Trip</th>
+            <th>User</th>
+            <th>Phone</th>
             <th>Rating</th>
             <th>Comment</th>
-            <th>Delete</th>
-            <th>Update</th>
+            <th class="text-center">Delete</th>
+            <th class="text-center">Edit</th>
+
         </tr>
+
     </thead>
 
     <tbody>
@@ -49,40 +78,58 @@ Reviews
             <td>{{ review.id }}</td>
 
             <td>
-                {{ review.trip.id }}
+                <span class="badge bg-primary">
+                    #{{ review.trip.id }}
+                </span>
             </td>
 
             <td>
-                {{ review.user.id }}
-            </td>
-
-            <td>
+                <i class="fa-solid fa-user text-info me-1"></i>
                 {{ review.user.fullname }}
             </td>
 
-            <td>
-                {{ review.user.phone }}
-            </td>
+            <td>{{ review.user.phone }}</td>
 
             <td>
-                {{ review.rating }}
+
+                {% if review.rating == 5 %}
+                    ⭐⭐⭐⭐⭐
+                {% elif review.rating == 4 %}
+                    ⭐⭐⭐⭐
+                {% elif review.rating == 3 %}
+                    ⭐⭐⭐
+                {% elif review.rating == 2 %}
+                    ⭐⭐
+                {% else %}
+                    ⭐
+                {% endif %}
+
             </td>
 
-            <td>
-                {{ review.comment }}
-            </td>
-            <td>
+            <td>{{ review.comment }}</td>
+
+            <td class="text-center">
+
                 <a href="/reviews/delete/{{ review.id }}"
                    class="btn btn-danger btn-sm">
-                    Delete
+
+                    <i class="fa-solid fa-trash"></i>
+
                 </a>
+
             </td>
-            <td>
+
+            <td class="text-center">
+
                 <a href="/reviews/edit/{{ review.id }}"
-                class="btn btn-warning btn-sm">
-                    Edit
+                   class="btn btn-warning btn-sm">
+
+                    <i class="fa-solid fa-pen"></i>
+
                 </a>
+
             </td>
+
         </tr>
 
     {% endfor %}
@@ -90,5 +137,7 @@ Reviews
     </tbody>
 
 </table>
+
+</div>
 
 {% endblock %}

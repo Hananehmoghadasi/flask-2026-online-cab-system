@@ -1,29 +1,122 @@
 {% extends "base.html" %}
 
+{% block title %}
+Sign Up
+{% endblock %}
+
 {% block content %}
-<h2>ثبت نام</h2>
-<form method="POST">
-    <div class="mb-3">
-        <label>نام کامل</label>
-        <input type="text" name="fullname" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>شماره تلفن</label>
-        <input type="text" name="phone" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>رمز عبور</label>
-        <input type="password" name="password" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>نقش</label>
-        <select name="role" class="form-control">
-            <option value="passenger">مسافر</option>
-            <option value="driver">راننده</option>
-            <option value="admin">مدیر (نیاز به تأیید جداگانه)</option>
-        </select>
-    </div>
-    <button class="btn btn-primary">ثبت نام</button>
-    <a href="/login" class="btn btn-secondary">ورود</a>
-</form>
+
+<div class="card p-4 mx-auto form-card">
+
+    <h2 class="text-center mb-4">
+        <i class="fa-solid fa-user-plus text-info"></i>
+        Create Account
+    </h2>
+
+    <form method="POST">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                name="fullname"
+                class="form-control"
+                placeholder="Enter your full name"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Phone Number
+            </label>
+
+            <input
+                type="text"
+                name="phone"
+                class="form-control"
+                placeholder="09xxxxxxxxx"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Enter your password"
+                required>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label class="form-label">
+                Account Role
+            </label>
+
+            <select
+                name="role"
+                class="form-select"
+                required>
+
+                <option value="passenger">
+                     Passenger
+                </option>
+
+                <option value="driver">
+                     Driver
+                </option>
+
+                <option value="admin">
+                     Admin
+                </option>
+
+            </select>
+
+            <div class="form-text">
+                Admin accounts require separate approval.
+            </div>
+
+        </div>
+
+        <div class="d-grid gap-2">
+
+            <button
+                type="submit"
+                class="btn btn-success">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Create Account
+
+            </button>
+
+            <a
+                href="/login"
+                class="btn btn-outline-light">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                Already have an account? Login
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
 {% endblock %}

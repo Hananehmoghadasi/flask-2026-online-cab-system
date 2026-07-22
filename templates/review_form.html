@@ -6,60 +6,92 @@ Add Review
 
 {% block content %}
 
-<h2>Add New Review</h2>
-<form method="POST">
+<div class="card p-4 mx-auto" style="max-width:700px;">
 
-    <div class="mb-3">
-        <label>User</label>
+    <h2 class="mb-4 text-center">
+        <i class="fa-solid fa-star text-warning"></i>
+        Add New Review
+    </h2>
 
-        <select name="user_id" class="form-control">
+    <form method="POST">
 
-            {% for user in users %}
+        <div class="mb-3">
+            <label class="form-label">User</label>
 
-            <option value="{{ user.id }}">
-                {{ user.fullname }} ({{ user.phone }})
-            </option>
+            <select name="user_id" class="form-select">
 
-            {% endfor %}
+                {% for user in users %}
 
-        </select>
+                <option value="{{ user.id }}">
+                    {{ user.fullname }} ({{ user.phone }})
+                </option>
 
-    </div>
-    <div class="mb-3">
-        <label>Trip</label>
+                {% endfor %}
 
-        <select name="trip_id" class="form-control">
+            </select>
 
-            {% for trip in trips %}
+        </div>
 
-            <option value="{{ trip.id }}">
-                {{ trip.id}} ({{ trip.driver.user.fullname}}) ({{ trip.passenger.user.fullname}})
-            </option>
+        <div class="mb-3">
 
-            {% endfor %}
+            <label class="form-label">Trip</label>
 
-        </select>
+            <select name="trip_id" class="form-select">
 
-    </div>
+                {% for trip in trips %}
 
-    <div class="mb-3">
-        <label>Rating</label>
-        <input type="number"
-               step="1"
-               name="rating"
-               value="{{ review.rating if review else '' }}"
-               class="form-control">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Comment</label>
-        <input
-            type="text"
-            name="comment"
-            class="form-control"
-            required>
-    </div>
-    <button class="btn btn-primary">
-        Save Review
-    </button>
-</form>
+                <option value="{{ trip.id }}">
+                    Trip #{{ trip.id }} | Driver: {{ trip.driver.user.fullname }} | Passenger: {{ trip.passenger.user.fullname }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">Rating</label>
+
+            <input
+                type="number"
+                name="rating"
+                min="1"
+                max="5"
+                class="form-control"
+                value="{{ review.rating if review else '' }}"
+                placeholder="1 - 5">
+
+        </div>
+
+        <div class="mb-4">
+
+            <label class="form-label">Comment</label>
+
+            <textarea
+                name="comment"
+                class="form-control"
+                rows="4"
+                placeholder="Write your review..."
+                required>{{ review.comment if review else '' }}</textarea>
+
+        </div>
+
+        <div class="text-center">
+
+            <button type="submit" class="btn btn-primary px-5">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Review
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
 {% endblock %}

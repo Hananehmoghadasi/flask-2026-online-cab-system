@@ -6,74 +6,67 @@ Add User
 
 {% block content %}
 
-<h2>Add New User</h2>
+<div class="card p-4 mx-auto" style="max-width:700px;">
 
+    <h2 class="mb-4 text-center">
+        <i class="fa-solid fa-user-plus text-info"></i>
+        Add New User
+    </h2>
 
-<form method="POST">
-label>Full Name</label>
+    <form method="POST">
 
-<input type="text"
-       name="fullname">
+        <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input
+                type="text"
+                name="fullname"
+                class="form-control"
+                placeholder="Enter full name"
+                required>
+        </div>
 
-<br>
+        <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <input
+                type="text"
+                name="phone"
+                class="form-control"
+                placeholder="09xxxxxxxxx"
+                required>
+        </div>
 
-<label>Phone</label>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Enter password"
+                required>
+        </div>
 
-<input type="text"
-       name="phone">
+        <div class="mb-4">
+            <label class="form-label">Role</label>
+            <select
+                name="role"
+                class="form-select">
 
-<br>
+                <option value="admin">Admin</option>
+                <option value="driver">Driver</option>
+                <option value="passenger">Passenger</option>
 
-<label>Password</label>
+            </select>
+        </div>
 
-<input type="password"
-       name="password">
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary px-5">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Save User
+            </button>
+        </div>
 
-<br>
+    </form>
 
-<label>Role</label>
+</div>
 
-<select name="role">
-
-    <option value="admin">
-        Admin
-    </option>
-
-    <option value="driver">
-        Driver
-    </option>
-
-    <option value="passenger">
-        Passenger
-    </option>
-
-</select>
-
-    <div class="mb-3">
-        <label class="form-label">Full Name</label>
-
-        <input
-            type="text"
-            name="fullname"
-            class="form-control"
-            required>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Phone Number</label>
-
-        <input
-            type="text"
-            name="phone"
-            class="form-control"
-            required>
-    </div>
-
-    <button class="btn btn-primary">
-        Save User
-    </button>
-
-</form>
-
-<
 {% endblock %}

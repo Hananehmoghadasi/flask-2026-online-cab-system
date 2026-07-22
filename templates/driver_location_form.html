@@ -1,55 +1,93 @@
 {% extends "base.html" %}
 
+{% block title %}
+Driver Location
+{% endblock %}
+
 {% block content %}
 
-<form method="POST">
+<div class="card p-4 mx-auto form-card">
 
-    <label>Driver</label>
+    <h2 class="mb-4 text-center">
+        <i class="fa-solid fa-location-dot text-danger"></i>
+        Driver Location
+    </h2>
 
-    <select name="driver_id">
+    <form method="POST">
 
-        {% for driver in drivers %}
+        <div class="mb-3">
 
-        <option value="{{ driver.id }}"
+            <label class="form-label">Driver</label>
 
-        {% if location and location.driver.id == driver.id %}
-            selected
-        {% endif %}
+            <select name="driver_id" class="form-select">
 
-        >
+                {% for driver in drivers %}
 
-            {{ driver.user.fullname }}
+                <option value="{{ driver.id }}"
+                    {% if location and location.driver.id == driver.id %}
+                        selected
+                    {% endif %}>
 
-        </option>
+                    {{ driver.user.fullname }}
 
-        {% endfor %}
+                </option>
 
-    </select>
+                {% endfor %}
 
-    <br><br>
+            </select>
 
-    <label>Latitude</label>
+        </div>
 
-    <input type="number"
-           step="0.000001"
-           name="latitude"
-           value="{{ location.latitude if location else '' }}">
+        <div class="mb-3">
 
-    <br><br>
+            <label class="form-label">
+                <i class="fa-solid fa-location-dot text-success"></i>
+                Latitude
+            </label>
 
-    <label>Longitude</label>
+            <input
+                type="number"
+                step="0.000001"
+                name="latitude"
+                class="form-control"
+                placeholder="35.6892"
+                value="{{ location.latitude if location else '' }}"
+                required>
 
-    <input type="number"
-           step="0.000001"
-           name="longitude"
-           value="{{ location.longitude if location else '' }}">
+        </div>
 
-    <br><br>
+        <div class="mb-4">
 
-    <button class="btn btn-primary">
-        Save
-    </button>
+            <label class="form-label">
+                <i class="fa-solid fa-location-dot text-primary"></i>
+                Longitude
+            </label>
 
-</form>
+            <input
+                type="number"
+                step="0.000001"
+                name="longitude"
+                class="form-control"
+                placeholder="51.3890"
+                value="{{ location.longitude if location else '' }}"
+                required>
+
+        </div>
+
+        <div class="text-center">
+
+            <button type="submit" class="btn btn-primary px-5">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Location
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
 
 {% endblock %}

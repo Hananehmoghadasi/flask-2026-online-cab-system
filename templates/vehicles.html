@@ -6,37 +6,66 @@ Vehicles
 
 {% block content %}
 
-<h2>Vehicles</h2>
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
 
-<a href="/vehicles/add" class="btn btn-success mb-3">
-    Add Vehicle
-</a>
+    <h2 class="mb-3 mb-md-0">
+        <i class="fa-solid fa-car text-info"></i>
+        Vehicles
+    </h2>
+
+    <a href="/vehicles/add" class="btn btn-success">
+        <i class="fa-solid fa-plus"></i>
+        Add Vehicle
+    </a>
+
+</div>
 
 <form method="GET"
-      action="/vehicles/search">
+      action="/vehicles/search"
+      class="row g-2 mb-4">
 
-    <input type="text"
-           name="q"
-           placeholder="Driver Name , Plate">
+    <div class="col-md-10">
 
-    <button>
-        Search
-    </button>
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search by driver name or plate">
+
+    </div>
+
+    <div class="col-md-2 d-grid">
+
+        <button class="btn btn-primary">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Search
+
+        </button>
+
+    </div>
 
 </form>
 
-<table class="table table-bordered">
+<div class="table-responsive">
 
-    <thead>
+<table class="table table-hover align-middle">
+
+    <thead class="table-dark">
+
         <tr>
+
             <th>ID</th>
-            <th>Driver Name</th>
+            <th>Driver</th>
             <th>Model</th>
             <th>Color</th>
             <th>Plate</th>
-            <th>Delete</th>
-            <th>Update</th>
+            <th class="text-center">Delete</th>
+            <th class="text-center">Edit</th>
+
         </tr>
+
     </thead>
 
     <tbody>
@@ -44,28 +73,51 @@ Vehicles
     {% for vehicle in vehicles %}
 
         <tr>
+
             <td>{{ vehicle.id }}</td>
 
-            <td>{{ vehicle.driver.user.fullname }}</td>
-
-            <td>{{ vehicle.model }}</td>
-
-            <td>{{ vehicle.color }}</td>
-
-            <td>{{ vehicle.plate }}</td>
+            <td>
+                <i class="fa-solid fa-user text-info me-1"></i>
+                {{ vehicle.driver.user.fullname }}
+            </td>
 
             <td>
+                <i class="fa-solid fa-car-side text-primary me-1"></i>
+                {{ vehicle.model }}
+            </td>
+
+            <td>
+                {{ vehicle.color }}
+            </td>
+
+            <td>
+                <span class="badge bg-dark">
+                    {{ vehicle.plate }}
+                </span>
+            </td>
+
+            <td class="text-center">
+
                 <a href="/vehicles/delete/{{ vehicle.id }}"
                    class="btn btn-danger btn-sm">
-                    Delete
+
+                    <i class="fa-solid fa-trash"></i>
+
                 </a>
+
             </td>
-            <td>
+
+            <td class="text-center">
+
                 <a href="/vehicles/edit/{{ vehicle.id }}"
-                class="btn btn-warning btn-sm">
-                    Edit
+                   class="btn btn-warning btn-sm">
+
+                    <i class="fa-solid fa-pen"></i>
+
                 </a>
+
             </td>
+
         </tr>
 
     {% endfor %}
@@ -73,5 +125,7 @@ Vehicles
     </tbody>
 
 </table>
+
+</div>
 
 {% endblock %}

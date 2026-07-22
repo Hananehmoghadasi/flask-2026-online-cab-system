@@ -1,88 +1,198 @@
 {% extends "base.html" %}
 
+{% block title %}
+Dashboard
+{% endblock %}
+
 {% block content %}
 
-<h2>Dashboard</h2>
+<h2 class="mb-4">
+    <i class="fa-solid fa-chart-line text-info"></i>
+    Dashboard
+</h2>
 
-<div class="row">
+<div class="row g-4">
 
     <div class="col-md-4">
-        <div class="card p-3">
-            <h5>Users</h5>
-            <h3>{{ total_users }}</h3>
+        <div class="card dashboard-card text-center">
+            <div class="card-body">
+                <i class="fa-solid fa-users fa-2x text-primary mb-3"></i>
+                <h5>Total Users</h5>
+                <h2>{{ total_users }}</h2>
+            </div>
         </div>
     </div>
 
     <div class="col-md-4">
-        <div class="card p-3">
-            <h5>Drivers</h5>
-            <h3>{{ total_drivers }}</h3>
+        <div class="card dashboard-card text-center">
+            <div class="card-body">
+                <i class="fa-solid fa-car-side fa-2x text-success mb-3"></i>
+                <h5>Total Drivers</h5>
+                <h2>{{ total_drivers }}</h2>
+            </div>
         </div>
     </div>
 
     <div class="col-md-4">
-        <div class="card p-3">
-            <h5>Passengers</h5>
-            <h3>{{ total_passengers }}</h3>
+        <div class="card dashboard-card text-center">
+            <div class="card-body">
+                <i class="fa-solid fa-user-group fa-2x text-warning mb-3"></i>
+                <h5>Total Passengers</h5>
+                <h2>{{ total_passengers }}</h2>
+            </div>
         </div>
     </div>
 
 </div>
 
-<br>
-
-<div class="row">
+<div class="row g-4 mt-2">
 
     <div class="col-md-6">
-        <div class="card p-3">
-            <h5>Total Trips</h5>
-            <h3>{{ total_trips }}</h3>
+        <div class="card dashboard-card text-center">
+            <div class="card-body">
+                <i class="fa-solid fa-route fa-2x text-info mb-3"></i>
+                <h5>Total Trips</h5>
+                <h2>{{ total_trips }}</h2>
+            </div>
         </div>
     </div>
 
     <div class="col-md-6">
-        <div class="card p-3">
-            <h5>Completed Trips</h5>
-            <h3>{{ completed_trips }}</h3>
+        <div class="card dashboard-card text-center">
+            <div class="card-body">
+                <i class="fa-solid fa-circle-check fa-2x text-success mb-3"></i>
+                <h5>Completed Trips</h5>
+                <h2>{{ completed_trips }}</h2>
+            </div>
         </div>
     </div>
 
 </div>
 
-<br>
+<div class="card dashboard-card mt-4 text-center">
 
-<div class="card p-3">
-    <h4>Total Revenue</h4>
-    <h2>{{ total_revenue }}</h2>
+    <div class="card-body">
+
+        <i class="fa-solid fa-money-bill-wave fa-2x text-warning mb-3"></i>
+
+        <h4>Total Revenue</h4>
+
+        <h1 class="text-success">
+
+            💰 {{ total_revenue }}
+
+        </h1>
+
+    </div>
+
 </div>
-<div>
-  <canvas id="myChart"></canvas>
+
+<div class="card dashboard-card mt-4">
+
+    <div class="card-body">
+
+        <h4 class="mb-4">
+            <i class="fa-solid fa-chart-column text-info"></i>
+            System Statistics
+        </h4>
+
+        <canvas id="myChart"></canvas>
+
+    </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  const ctx = document.getElementById('myChart');
 
-  new Chart(ctx, {
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+
     type: 'bar',
-    data: {
-      labels: ['Users', 'Drivers', 'Passengers', 'Total_trips', 'Completed_trips', 'Total Revenue'],
-      datasets: [{
-        label: '# of Votes',
-        data: [{{ total_users }}, {{ total_drivers }}, {{ total_passengers }}, {{ total_trips }}, {{ completed_trips }}, {{ total_revenue }}],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
 
+    data: {
+
+        labels: [
+            'Users',
+            'Drivers',
+            'Passengers',
+            'Trips',
+            'Completed',
+            'Revenue'
+        ],
+
+        datasets: [{
+
+            label: 'Taxi Online',
+
+            data: [
+                {{ total_users }},
+                {{ total_drivers }},
+                {{ total_passengers }},
+                {{ total_trips }},
+                {{ completed_trips }},
+                {{ total_revenue }}
+            ],
+
+            backgroundColor: [
+                '#0dcaf0',
+                '#198754',
+                '#ffc107',
+                '#0d6efd',
+                '#20c997',
+                '#fd7e14'
+            ],
+
+            borderRadius: 8
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+                display: false
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                ticks: {
+
+                    color: "#ffffff"
+
+                }
+
+            },
+
+            x: {
+
+                ticks: {
+
+                    color: "#ffffff"
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
 
 {% endblock %}
